@@ -1,0 +1,23 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/newsreader";
+@import "@fontsource-variable/newsreader/wght-italic.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Cyan */
+  :root {
+    --color-text-main: 4 35 39;
+    --color-bg-main: 231 241 243;
+    --color-bg-muted: 208 217 219;
+    --color-border-main: 22 42 43;
+  }
+  html.dark {
+    --color-text-main: 214 224 226;
+    --color-bg-main: 3 25 27;
+    --color-bg-muted: 23 34 35;
+    --color-border-main: 214 224 226;
+  }
+}
