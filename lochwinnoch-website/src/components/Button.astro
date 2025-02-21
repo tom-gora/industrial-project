@@ -1,24 +1,27 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types";
+import { Button as HUIBtn } from "@headlessui/react";
 
-type AnchorProps = HTMLAttributes<'a'> & { type?: never };
-type ButtonProps = HTMLAttributes<'button'> & { href?: never };
+type AnchorProps = HTMLAttributes<"a"> & { type?: never };
+type ButtonProps = HTMLAttributes<"button"> & { href?: never };
 
 type Props = ButtonProps | AnchorProps;
 
 const { href, class: className, ...rest } = Astro.props;
+const anchorClasses =
+  "btn-custom grid items-center justify-center px-6 py-2 font-serif leading-tight font-extrabold text-main bg-main outline outline-1 outline-offset-[-0.15rem] outline-main rounded-xl transition-all hover:bg-muted/50 active:bg-main focus-visible:bg-muted/50 focus-visible:ring-4 focus-visible:ring-subtle/90 hover:outline-offset-0";
 const buttonClasses =
-    'inline-flex items-center justify-center px-6 py-2 font-serif leading-tight bold italic text-main bg-main border border-main rounded-full transition hover:bg-muted';
+  "btn-custom grid items-center justify-center px-6 py-2 font-serif leading-tight font-extrabold text-main bg-main outline outline-1 outline-offset-[-0.15rem] outline-main rounded-xl transition-all data-[hover]:bg-muted/50 data-[active]:bg-main data-[focus]:bg-muted/50 data-[focus]:ring-4 data-[focus]:ring-subtle/90 data-[hover]:outline-offset-0";
 ---
 
 {
-    href ? (
-        <a href={href} class:list={[buttonClasses, className]} {...rest}>
-            <slot />
-        </a>
-    ) : (
-        <button class:list={[buttonClasses, className]} {...rest}>
-            <slot />
-        </button>
-    )
+  href ? (
+    <a href={href} class:list={[anchorClasses, className]} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <HUIBtn client:visible className={[buttonClasses, className]} {...rest}>
+      <slot />
+    </HUIBtn>
+  )
 }

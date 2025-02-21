@@ -5,22 +5,28 @@ module.exports = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: ["Inter Variable", ...defaultTheme.fontFamily.sans],
-      serif: ["Newsreader Variable", ...defaultTheme.fontFamily.serif],
+      sans: ["Hammersmith One", ...defaultTheme.fontFamily.sans],
+      serif: ["EB Garamond Variable", ...defaultTheme.fontFamily.serif]
     },
     extend: {
+      ringColor: {
+        main: "rgb(var(--color-text-main) / <alpha-value>)",
+        subtle: "rgb(var(--color-bg-muted) / <alpha-value>)"
+      },
       textColor: {
         main: "rgb(var(--color-text-main) / <alpha-value>)",
+        "bg-like": "rgb(var(--color-bg-main) / <alpha-value>)"
       },
       backgroundColor: {
         main: "rgb(var(--color-bg-main) / <alpha-value>)",
-        muted: "rgb(var(--color-bg-muted) / <alpha-value>)",
+        "text-like": "rgb(var(--color-text-main) / <alpha-value>)",
+        muted: "rgb(var(--color-bg-muted) / <alpha-value>)"
       },
       borderColor: {
-        main: "rgb(var(--color-border-main) / <alpha-value>)",
+        main: "rgb(var(--color-border-main) / <alpha-value>)"
       },
       typography: (theme) => ({
-        dante: {
+        txtcolors: {
           css: {
             "--tw-prose-body": theme("textColor.main / 90%"),
             "--tw-prose-headings": theme("textColor.main / 100%"),
@@ -37,11 +43,18 @@ module.exports = {
             "--tw-prose-pre-code": theme("colors.zinc.100"),
             "--tw-prose-pre-bg": theme("colors.zinc.800"),
             "--tw-prose-th-borders": theme("borderColor.main / 100%"),
-            "--tw-prose-td-borders": theme("borderColor.main / 100%"),
-          },
+            "--tw-prose-td-borders": theme("borderColor.main / 100%")
+          }
         },
         DEFAULT: {
           css: {
+            body: {
+              fontFamily: theme("theme.fontFamily.serif"),
+              fontWeight: 400
+            },
+            nav: {
+              fontFamily: theme("theme.fontFamily.sans")
+            },
             a: {
               fontWeight: "normal",
               textDecoration: "underline",
@@ -49,12 +62,12 @@ module.exports = {
               textDecorationThickness: "1px",
               textUnderlineOffset: "2px",
               "&:hover": {
-                textDecorationStyle: "solid",
-              },
+                textDecorationStyle: "solid"
+              }
             },
             "h1,h2,h3,h4,h5,h6": {
-              fontFamily: theme("fontFamily.serif"),
-              fontWeight: 500,
+              fontFamily: theme("fontFamily.sans"),
+              fontWeight: 500
             },
             blockquote: {
               border: 0,
@@ -66,20 +79,20 @@ module.exports = {
               paddingLeft: 0,
               '@media (min-width: theme("screens.sm"))': {
                 fontSize: "1.66667em",
-                lineHeight: 1.3,
-              },
-            },
-          },
+                lineHeight: 1.3
+              }
+            }
+          }
         },
         lg: {
           css: {
             blockquote: {
-              paddingLeft: 0,
-            },
-          },
-        },
-      }),
-    },
+              paddingLeft: 0
+            }
+          }
+        }
+      })
+    }
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography")]
 };

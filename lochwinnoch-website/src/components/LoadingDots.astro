@@ -1,0 +1,28 @@
+<div class="loader mb-8 flex h-4 items-center space-x-2 font-sans">
+  <div class="aspect-square h-1 animate-bounce rounded-full bg-text-like [animation-delay:-0.3s]"></div>
+  <div class="aspect-square h-1 animate-bounce rounded-full bg-text-like [animation-delay:-0.15s]"></div>
+  <div class="aspect-square h-1 animate-bounce rounded-full bg-text-like"></div>
+</div>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const hour = new Date().getHours();
+    const loader = document.querySelector(".loader");
+    if (loader === null) return;
+    let greeter;
+    switch (true) {
+      case hour >= 1 && hour < 12:
+        greeter = "Good morning!";
+        break;
+      case hour >= 12 && hour < 18:
+        greeter = "Good afternoon!";
+        break;
+      case (hour >= 18 && hour <= 24) || hour == 0:
+        greeter = "Good evening!";
+        break;
+    }
+    setTimeout(() => {
+      greeter ? (loader.textContent = greeter) : (loader.textContent = "Hello!");
+    }, 200);
+  });
+</script>

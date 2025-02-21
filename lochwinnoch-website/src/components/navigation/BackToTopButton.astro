@@ -1,0 +1,31 @@
+<button
+  type="button"
+  data-twe-ripple-init
+  data-twe-ripple-color="light"
+  class="!fixed bottom-4 sm:bottom-12 end-0 sm:scale-110 hidden aspect-square rounded-tl-md rounded-bl-md bg-text-like/80 p-3 text-sm font-medium uppercase leading-tight text-bg-like transition duration-150 ease-in-out hover:bg-teal-900/75 focus:bg-teal-900/75 dark:hover:bg-pink-900/50 dark:focus:bg-pink-900/50 focus:outline-none focus:ring-0 active:bg-teal-900/90 dark:active:bg-pink-900/80"
+  id="btn-back-to-top"
+>
+  <span class="[&>svg]:w-4">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"></path>
+    </svg>
+  </span>
+</button>
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const mybutton = document.getElementById("btn-back-to-top");
+    const scrollFunction = () => {
+      const scrollThreshold = 32;
+      if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > 20) {
+        mybutton?.classList.remove("hidden");
+      } else {
+        mybutton?.classList.add("hidden");
+      }
+    };
+    const backToTop = () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+    mybutton?.addEventListener("click", backToTop);
+    window.addEventListener("scroll", scrollFunction);
+  });
+</script>

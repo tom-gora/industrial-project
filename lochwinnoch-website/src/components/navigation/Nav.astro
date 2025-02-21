@@ -1,0 +1,48 @@
+---
+import NavLogo from "./NavLogo.astro";
+import NavLink from "./NavLink.astro";
+import NavControls from "./NavControls.astro";
+
+import siteConfig from "../../data/site-config";
+const navLinks = siteConfig.headerNavLinks || [];
+---
+
+<NavControls />
+<nav
+  class="pointer-events-none fixed left-0 top-0 z-20 flex h-[100dvh] w-screen flex-col items-end justify-around bg-main/5 py-4 pl-8 pr-0 opacity-0 backdrop-blur-md sm:pointer-events-auto sm:h-max sm:flex-row sm:items-center sm:bg-main sm:px-24 sm:py-0 sm:pl-0 sm:opacity-100"
+>
+  <div
+    id="primary-navigation"
+    class="menu flex h-screen w-fit min-w-[55%] max-w-[90%] translate-x-full flex-col items-end justify-between rounded-bl-md rounded-tl-md border-b border-l border-t border-dashed border-main bg-main p-8 pb-12 pr-20 transition-transform duration-200 ease-out sm:h-full sm:w-screen sm:translate-x-0 sm:flex-row sm:items-center sm:border-none sm:py-4"
+  >
+    <NavLogo />
+    {
+      navLinks.length > 0 && (
+        <ul class="flex flex-col-reverse items-end justify-start gap-10 sm:flex-row sm:gap-6">
+          {navLinks.map((link) => (
+            <li>
+              <NavLink class="font-serif text-xl text-main hover:underline hover:decoration-1 hover:underline-offset-2 md:text-base" href={link.href}>
+                {link.text}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</nav>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const navOnScroll = () => {
+      const nav = document.querySelector("nav");
+      console.log("nav");
+      const scrollThreshold = 32;
+      window.addEventListener("scroll", () => {
+        console.log("scrolled");
+        window.scrollY > scrollThreshold ? nav?.classList.add("nav-edge") : nav?.classList.remove("nav-edge");
+      });
+      navOnScroll();
+    };
+  });
+</script>

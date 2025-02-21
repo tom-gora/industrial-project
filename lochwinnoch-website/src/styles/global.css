@@ -1,23 +1,66 @@
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/newsreader";
-@import "@fontsource-variable/newsreader/wght-italic.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  /* Cyan */
   :root {
-    --color-text-main: 4 35 39;
-    --color-bg-main: 231 241 243;
-    --color-bg-muted: 208 217 219;
-    --color-border-main: 22 42 43;
+    nav *,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply font-sans;
+    }
+    @apply font-serif;
+    --color-text-main: 17 46 50;
+    --color-bg-main: 197 206 208;
+    --color-bg-muted: 175 183 185;
+    --color-border-main: 34 53 54;
   }
   html.dark {
-    --color-text-main: 214 224 226;
-    --color-bg-main: 3 25 27;
+    --color-text-main: 193 202 203;
+    --color-bg-main: 2 18 20;
     --color-bg-muted: 23 34 35;
-    --color-border-main: 214 224 226;
+    --color-border-main: 183 192 193;
+  }
+
+  html.amoled.dark {
+    --color-text-main: 256 256 256;
+    --color-bg-main: 0 0 0;
+    --color-bg-muted: 55 55 55;
+    --color-border-main: 236 236 236;
+  }
+
+  html.amoled {
+    --color-text-main: 0 0 0;
+    --color-bg-main: 256 256 256;
+    --color-bg-muted: 200 200 200;
+    --color-border-main: 0 0 0;
+  }
+}
+
+@layer components {
+  .embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+@layer utilities {
+  .nav-edge {
+    --tw-shadow-color: rgb(var(var(--color-bg-main) / 0.5));
+    @apply shadow-md;
+  }
+
+  html.dark {
+    .nav-edge {
+      border-bottom: 1px solid rgb(var(--color-bg-muted) / 0.5);
+    }
   }
 }

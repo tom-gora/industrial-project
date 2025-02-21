@@ -1,0 +1,23 @@
+---
+import siteConfig from "../../data/site-config";
+const logo = {
+  src: siteConfig?.logo?.src || "",
+  alt: siteConfig?.logo?.alt || ""
+};
+---
+
+<a
+  href="/"
+  class="logo z-30 flex w-fit translate-x-4 flex-row-reverse flex-nowrap items-center justify-start gap-8 transition-transform duration-150 sm:-translate-x-8 sm:flex-row sm:justify-between"
+>
+  {
+  <img src={logo.src} alt={logo.alt || ""} class="max-h-8 sm:max-h-16" />
+<div class="text-theme-main font-serif text-2xl font-medium">{siteConfig.title}</div>
+}
+</a>
+
+<style>
+body:has(#skip-to-main:focus-within) a.logo {
+  @apply translate-x-32;
+}
+</style>

@@ -1,0 +1,84 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+import AccessibilityMenu from "./AccessibilityMenu.astro";
+import AccesibilityToggle from "./AccesibilityToggle.astro";
+---
+
+<div
+  class="ui-controls-wrapper fixed bottom-16 right-0 z-40 flex flex-col-reverse items-center justify-center gap-4 rounded-bl-md rounded-tl-md bg-text-like pb-3 pl-1.5 pr-0.5 pt-0 text-bg-like sm:top-9 sm:me-8 sm:h-min sm:flex-row sm:gap-8 sm:bg-main sm:pb-0 sm:text-main"
+>
+  <button
+    class="menu-toggle relative z-30 flex h-8 w-8 items-center justify-center md:hidden"
+    aria-label="Open Menu"
+    aria-expanded="false"
+    aria-controls="primary-navigation"
+  >
+    <span class="menu-toggle-icon relative h-px w-6 bg-current"></span>
+  </button>
+  <ThemeToggle />
+  <AccesibilityToggle />
+  <AccessibilityMenu />
+</div>
+
+<style>
+  .menu-toggle-icon {
+    transition: width 0.1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  }
+  .menu-toggle.is-active .menu-toggle-icon {
+    @apply w-0;
+    transition: width 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .menu-toggle-icon:before,
+  .menu-toggle-icon:after {
+    @apply absolute left-1/2 top-0 h-px w-6 origin-center -translate-x-1/2 bg-current;
+    content: "";
+    transition:
+      transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      margin 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  }
+  .menu-toggle-icon:before {
+    @apply -mt-1.5;
+  }
+  .menu-toggle-icon:after {
+    @apply mt-1.5;
+  }
+  .menu-toggle.is-active .menu-toggle-icon:before,
+  .menu-toggle.is-active .menu-toggle-icon:after {
+    @apply mt-0;
+    transition:
+      margin 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
+      transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  }
+  .menu-toggle.is-active .menu-toggle-icon:before {
+    @apply rotate-45;
+  }
+  .menu-toggle.is-active .menu-toggle-icon:after {
+    @apply -rotate-45;
+  }
+
+  @media (width >= 640px) {
+    .ui-controls-wrapper .menu-toggle {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const menuToggle = () => {
+      const nav = document.querySelector("nav");
+      const menu = document.querySelector(".menu");
+      const menuToggleBtn = document.querySelector(".menu-toggle");
+      menuToggleBtn?.addEventListener("click", () => {
+        const isMenuExpanded = menuToggleBtn.getAttribute("aria-expanded") === "true";
+        menuToggleBtn.classList.toggle("is-active");
+        menuToggleBtn.setAttribute("aria-expanded", isMenuExpanded ? "false" : "true");
+        menuToggleBtn.setAttribute("aria-label", isMenuExpanded ? "Open Menu" : "Close Menu");
+        nav?.classList.toggle("opacity-0");
+        nav?.classList.toggle("pointer-events-none");
+        menu?.classList.toggle("translate-x-full");
+      });
+    };
+    menuToggle();
+  });
+</script>
