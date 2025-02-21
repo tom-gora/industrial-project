@@ -49,18 +49,33 @@
       width: 100%;
       object-fit: cover;
     }
+    .animate-pulse::after {
+      content: "";
+      width: 1rem;
+      aspect-ratio: 1;
+      background-color: red;
+      inset: 0;
+    }
   }
 }
 
 @layer utilities {
-  .nav-edge {
-    --tw-shadow-color: rgb(var(var(--color-bg-main) / 0.5));
-    @apply shadow-md;
+  html:not(.dark) {
+    .nav-edge {
+      --tw-shadow-color: rgb(var(var(--color-bg-main) / 0.5));
+      @apply shadow-md;
+    }
   }
 
   html.dark {
     .nav-edge {
       border-bottom: 1px solid rgb(var(--color-bg-muted) / 0.5);
+    }
+  }
+
+  @media (width < 640px) {
+    body:has(#skip-to-main:focus-within) .loader {
+      opacity: 0;
     }
   }
 }

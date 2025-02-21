@@ -8,31 +8,61 @@ import Hero from "../components/Hero.astro";
 import LoadingDots from "../components/LoadingDots.astro";
 import ProjectPreview from "../components/ProjectPreview.astro";
 import NewsCarousel from "../components/react/EmblaCarousel.tsx";
+
 import siteConfig from "../data/site-config";
 
-const news = (await getCollection("news")).sort(sortItemsByDateDesc as any);
 const projects = (await getCollection("projects")).sort(sortItemsByDateDesc as any);
 const featuredProjects = projects.filter(({ data }) => data.isFeatured);
+console.log(featuredProjects.length);
+
+// get minimum data that needs to be sent to client for react component
+const news = (await getCollection("news")).slice(0, 3).sort(sortItemsByDateDesc as any);
+let newsReducedData: any = [];
+if (news.length > 0) {
+  newsReducedData = news.map((newsItem: any) => {
+    return {
+      id: newsItem.id,
+      image: newsItem.data.featureImage,
+      title: newsItem.data.title,
+      excerpt: newsItem.data.excerpt
+    } as any;
+  });
+}
 ---
 
 <BaseLayout description={siteConfig.description} image={siteConfig.image}>
   <LoadingDots />
   <Hero />
   <div class="relative">
-    <NewsCarousel news={news} client:only="react">
-      {
-        featuredProjects?.length > 0 && (
-          <div class="mb-16 sm:mb-24">
-            <h2 class="mb-12 font-serif text-xl italic sm:mb-16 sm:text-2xl">News</h2>
-            {featuredProjects.map((project) => (
-              <ProjectPreview project={project} class="mb-10 sm:mb-12" headingLevel="h3" />
-            ))}
-            <div class="mt-12 sm:mt-16">
-              <Button href="/projects">See All Projects</Button>
-            </div>
+    <div id="carousel-placeholder" class="absolute inset-4 bg-transparent">
+      <div class="my-4 h-12 w-5/12 animate-pulse rounded-md bg-muted opacity-25"></div>
+      <div class="my-4 h-12 w-11/12 animate-pulse rounded-md bg-muted opacity-25"></div>
+      <div class="my-4 aspect-video w-full animate-pulse rounded-md bg-muted opacity-25"></div>
+      <div class="my-4 h-12 w-11/12 animate-pulse rounded-md bg-muted opacity-25"></div>
+      <div class="my-4 flex h-12 w-fit gap-8 py-2">
+        <div class="h-full w-32 animate-pulse rounded-md bg-muted opacity-25"></div>
+        <div class="h-full w-32 animate-pulse rounded-md bg-muted opacity-25"></div>
+      </div>
+    </div>
+    <div id="placeholder-spacer" class="h-[41rem] bg-transparent sm:h-[51rem]"></div>
+    <NewsCarousel news={newsReducedData} client:only="react" />
+
+    <div class="ml-4 mr-auto mt-12 w-fit sm:mt-16">
+      <Button href="/projects">See All News</Button>
+    </div>
+    {
+      featuredProjects?.length > 0 && (
+        <div class="my-8 sm:mb-24">
+          <h2 class="mb-12 font-serif text-xl sm:mb-16 sm:text-4xl">Our Projects</h2>
+          {featuredProjects.map((project) => (
+            <ProjectPreview project={project} class="mb-10 sm:mb-12" headingLevel="h3" />
+          ))}
+          <div class="ml-4 mr-auto mt-12 w-fit sm:mt-16">
+            <Button href="/projects">See All Projects</Button>
           </div>
-        )
-      }
-    </NewsCarousel>
+        </div>
+      )
+    }
+    <p>test paragraph</p>
   </div>
 </BaseLayout>

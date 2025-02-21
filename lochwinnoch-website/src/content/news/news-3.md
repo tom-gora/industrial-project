@@ -1,6 +1,6 @@
 ---
 title: Offshore Wind Farm Protest in a Coastal Village
-excerpt: Discussing the importance of local news in preserving local communities.
+excerpt: Test excerpt of the mock article.
 featureImage: { src: "https://picsum.photos/800/400", alt: "Test image" }
 publishDate: "May 26 2023"
 isFeatured: true

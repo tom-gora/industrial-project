@@ -14,7 +14,7 @@ const autoPlayOpts = {
 };
 
 const buttonClasses =
-  "btn-custom outline-main grid items-center justify-center rounded-xl bg-main px-6 py-2 font-serif font-extrabold leading-tight text-main outline outline-1 outline-offset-[-0.15rem] transition-all data-[active]:bg-main data-[focus]:bg-muted/50 data-[hover]:bg-muted/50 data-[hover]:outline-offset-0 data-[focus]:ring-4 data-[focus]:ring-subtle/90";
+  "btn-custom outline-main grid w-28 items-center justify-center rounded-xl bg-main px-6 py-2 font-serif font-extrabold leading-tight text-main outline outline-1 outline-offset-[-0.15rem] transition-all data-[active]:bg-main data-[focus]:bg-muted/50 data-[hover]:bg-muted/50 data-[hover]:outline-offset-0 data-[focus]:ring-4 data-[focus]:ring-subtle/90";
 
 export default (props: any) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(emblaOpts, [Autoplay(autoPlayOpts)]);
@@ -29,41 +29,45 @@ export default (props: any) => {
 
   const news = props.news;
 
+  const staticPlaceholder = document.querySelector("#carousel-placeholder");
+  const placeholderSpacer = document.querySelector("#placeholder-spacer");
+  staticPlaceholder?.remove();
+  placeholderSpacer?.remove();
+
   const onLoadHandler = (id: string) => () => {
     const loaded = document.querySelector(`#${id}`);
-    loaded?.parentNode.classList.remove("animate-pulse", "opacity-50");
+    const loadedParent = loaded?.parentNode as HTMLElement;
+    loadedParent.classList.remove("animate-pulse", "opacity-50");
   };
 
   return (
-    <div className="embla relative mb-12 h-fit w-fit py-4">
-      <h1 className="px-4 py-8 text-3xl">Recent news</h1>
-      <div className="mb-4 grid items-center">
+    <div className={`embla relative mb-12 flex h-fit w-full flex-col sm:h-[48rem] ${news.length > 0 ? "" : "hidden"}`}>
+      <h1 className="px-4 py-8 text-4xl">Recent news from us</h1>
+      <div className="mb-4 grid items-start sm:grow">
         <div className="embla__viewport h-fit overflow-hidden" ref={emblaRef}>
-          <div className="embla__container flex items-start gap-8">
+          <div className="embla__container group flex items-start gap-4">
             {news?.length > 0 &&
               news.map((newsItem: any) => (
                 <div key={newsItem.id} className="embla__slide flex flex-col items-start justify-center gap-4 px-4">
-                  <h2 className="font-serif text-xl">{newsItem.data.title}</h2>
-                  <div className="z-10 aspect-video w-full animate-pulse rounded-md border-2 border-current bg-text-like opacity-50 duration-75">
+                  <h2 className="font-serif text-2xl">{newsItem.title}</h2>
+                  <div className="z-10 aspect-video w-full animate-pulse rounded-md border-2 border-main bg-muted text-transparent opacity-50">
                     <img
                       id={newsItem.id}
                       onLoad={onLoadHandler(newsItem.id)}
-                      src={newsItem.data.featureImage.src}
-                      alt={newsItem.data.featureImage.alt}
+                      src={newsItem.image.src}
+                      alt={newsItem.image.alt}
                       fetchPriority={newsItem.id === news[0].id ? "high" : "auto"}
-                      className="ebla__image aspect-video rounded-md border-2 border-current bg-cover"
+                      className="ebla__image aspect-video rounded-md border-2 border-current"
                     />
                   </div>
-                  <p className="text-lg">{newsItem.data.excerpt}</p>
-                  <a href="#" className="flex gap-2">
-                    Read more
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                      <path
-                        fill="currentColor"
-                        fillRule="evenodd"
-                        d="M9.646 7.646a.5.5 0 0 1 .708 0L14.707 12l-4.353 4.354a.5.5 0 0 1-.708-.708L13.293 12L9.646 8.354a.5.5 0 0 1 0-.708"
-                        clipRule="evenodd"
-                      ></path>
+                  <p className="h-max grow text-lg">{newsItem.excerpt}</p>
+                  <a
+                    href="#"
+                    className="flex items-center gap-1 italic underline-offset-[5px] opacity-0 duration-150 hover:underline focus-visible:underline group-focus-within:opacity-100 group-hover:opacity-100 group-focus:opacity-100"
+                  >
+                    Read More
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 fill-current">
+                      <path d="M4.286 12c0-0.533 0.432-0.964 0.964-0.964v0h11.172l-4.14-4.138c-0.175-0.175-0.283-0.416-0.283-0.683 0-0.533 0.432-0.965 0.965-0.965 0.267 0 0.508 0.108 0.683 0.283v0l5.785 5.785c0.175 0.175 0.283 0.416 0.283 0.683s-0.108 0.508-0.283 0.683l-5.785 5.785c-0.175 0.175-0.416 0.283-0.683 0.283-0.533 0-0.965-0.432-0.965-0.965 0-0.267 0.108-0.508 0.283-0.683v0l4.14-4.138h-11.172c-0.533 0-0.964-0.432-0.964-0.964v0z"></path>
                     </svg>
                   </a>
                 </div>
@@ -71,9 +75,9 @@ export default (props: any) => {
           </div>
         </div>
       </div>
-      <div className="embla__controls flex h-min w-fit justify-start gap-8 pt-2">
+      <div className="embla__controls flex h-min w-fit justify-start gap-8 px-4 pt-2">
         <Button className={`${buttonClasses} embla__prev`} onClick={scrollPrev}>
-          Prev
+          Previous
         </Button>
         <Button className={`${buttonClasses} embla__next`} onClick={scrollNext}>
           Next
