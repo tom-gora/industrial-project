@@ -24,6 +24,12 @@ const projects = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
   schema: z.object({
     title: z.string(),
+    heroImage: z
+      .object({
+        src: z.string(),
+        alt: z.string().optional()
+      })
+      .optional(),
     description: z.string().optional(),
     publishDate: z.coerce.date(),
     isFeatured: z.boolean().default(false),

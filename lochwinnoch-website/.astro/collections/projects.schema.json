@@ -7,6 +7,21 @@
         "title": {
           "type": "string"
         },
+        "heroImage": {
+          "type": "object",
+          "properties": {
+            "src": {
+              "type": "string"
+            },
+            "alt": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "src"
+          ],
+          "additionalProperties": false
+        },
         "description": {
           "type": "string"
         },

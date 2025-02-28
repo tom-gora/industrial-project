@@ -1,61 +1,37 @@
 ---
-title: "NeuralPlaylist - AI Generated Music Recommendations"
-description: Leveraging advanced algorithms and machine learning, NeuralPlaylist crafts personalized music recommendations based on users' preferences, moods, and even biometric data.
-publishDate: "Oct 19 2023"
+title: "Progress updates on Lochwinnoch Recreation Park"
+description: Recent updates on the Lochwinnoch Recreation Park renovations.
+publishDate: "Sep 02 2024"
+isFeatured: true
+heroImage:
+  src: "/projects/project-4_featured.jpg"
+  alt: "Men working in a workshop"
 seo:
   image:
-    src: "/project-4.jpg"
+    src: "/projects/project-4_featured.jpg"
+    alt: "Men working in a workshop"
 ---
 
-![Project preview](/project-4.jpg)
+### Lochwinnoch Recreation Park update (30/7/24)
 
-**Note:** This case study is entirely fictional and created for the purpose of showcasing [Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/).
+The teen shelter has been installed.
 
-**Project Overview:**
-NeuralPlaylist is a cutting-edge web application that redefines music discovery through the power of artificial intelligence. Leveraging advanced algorithms and machine learning, NeuralPlaylist crafts personalized music recommendations based on users' preferences, moods, and even biometric data.
+![Project preview](/projects/project-4_01.jpg)
 
-## Objectives
+### Lochwinnoch Recreation Park update (March 2024)
 
-1. Develop an intuitive and user-friendly web application that utilizes AI to curate personalized music playlists for users.
-2. Implement machine learning models that analyze user behavior, preferences, and physiological responses to create dynamic and context-aware music recommendations.
-3. Provide an immersive and interactive platform that enhances the music listening experience and introduces users to new genres and artists.
+- in addition to the work that has been completed – the planned mural has been painted on the wall facing onto the play area. Go have a look.
 
-## Features
+![Project preview](/projects/project-4_02.jpg)
 
-1. **Biometric Mood Analysis:**
+Installation of the teen shelter is still in progress, so more to come.
 
-- NeuralPlaylist incorporates biometric data analysis to understand users' moods and emotional states.
-- The AI algorithms use facial recognition and heart rate data to curate playlists that match users' current emotional states.
+### Project background
 
-2. **Personalized Playlists:**
+In late 2020, LCDT took on the grassroots campaign to raise money to renovate our local park. A committee of our members have worked very hard on this project, conducting surveys to discover what the community wanted from a park, liaising with equipment suppliers to create designs and budgets for a fully upgraded play park, an intergenerational seating area and a space for teenagers, with local media to raise awareness, and with council representatives to find out what might be possible on the site itself.
 
-- Users receive dynamic and highly personalized playlists based on their music history, preferences, and contextual factors.
-- NeuralPlaylist adapts to users' evolving tastes, introducing them to new genres and artists that align with their musical journey.
+• We successfully applied to two major Renfrewshire Council funds, winning £30,000 from the Villages Investment Fund and £50,000 from the Green Spaces fund; we also oversaw the Community Olympics event, which saw teams of villagers competing in sponsored events throughout April and raised almost £10,000 towards the renovation.
 
-3. **Context-Aware Recommendations:**
+• Because of the success of the project, the level of community engagement and the release of new Scottish Government funds towards play park development, Renfrewshire Council have agreed not only to make up the rest of the £150,000 needed for the play park, but also to make our park one of the first spaces they regenerate. Work should be completed in summer 2022.
 
-- The application takes into account contextual factors such as time of day, weather, and location to tailor music recommendations.
-- Users receive playlists suited for specific occasions, moods, and environments.
-
-4. **Collaborative Playlists:**
-
-- NeuralPlaylist encourages social interaction by allowing users to create and share collaborative playlists with friends.
-- Friends can contribute to the playlist, creating a shared musical experience that adapts to the collective preferences of the group.
-
-5. **Real-Time Feedback Integration:**
-
-- Users can provide real-time feedback on song selections, allowing the AI to continuously refine recommendations.
-- The system learns from user interactions to enhance the accuracy of future music suggestions.
-
-## Technology Stack
-
-- Frontend: Vue.js for a dynamic and responsive user interface.
-- Backend: Flask for handling server-side logic and API integration.
-- Database: MongoDB for efficient storage and retrieval of user and music data.
-- AI Integration: PyTorch for developing machine learning models for music recommendation and biometric analysis.
-
-## Outcome
-
-NeuralPlaylist has redefined the music listening experience by harnessing the power of AI to provide users with hyper-personalized and context-aware playlists. The application not only adapts to users' musical preferences but also introduces them to new and exciting musical journeys based on their emotions and surroundings.
-
-**Note:** This case study is entirely fictional and created for the purpose of showcasing [Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/).
+• Our committee are continuing to raise funds for an intergenerational seating area, as well as separate area for teenagers. Working with a group of 12-14 year olds we applied successfully to the Celebrating Renfrewshire (Villages) fund for £2700 towards the latter project; the girls made a TikTok video for their application, informed by the Make Space For Girls campaign which suggests ways of making public spaces more accessible to teenage girls.

@@ -1,0 +1,65 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NewsPreview from "../../components/NewsPreview.astro";
+import GoBackButton from "../../components/GoBackButton.astro";
+import Button from "../../components/Button.astro";
+import Image from "astro/components/Image.astro";
+
+import type { NewsItem } from "../../utils/directus";
+import { fetchNews } from "../../utils/directus-utils";
+
+const { slug } = Astro.params;
+
+const news = await fetchNews();
+const newsCount = news.length;
+
+const newsItem = news.find((newsItem) => newsItem.slug === slug);
+if (!newsItem) return Astro.redirect("/404");
+const foundIndex = news.findIndex((item) => item === newsItem);
+
+const prevNewsItem = foundIndex + 1 !== newsCount ? news[foundIndex + 1] : null;
+const nextNewsItem = foundIndex !== 0 ? news[foundIndex - 1] : null;
+
+const { title, excerpt, heroImage, content } = newsItem;
+
+type Props = { onClick?: Function; newsItem: NewsItem; prevNewsItem: NewsItem; nextNewsItem: NewsItem; direction: string };
+
+const DIRECTUS_URL: string | undefined = import.meta.env.DIRECTUS_URL;
+---
+
+<BaseLayout
+  title={title}
+  description={excerpt}
+  image={{ src: `${DIRECTUS_URL}/assets/${heroImage?.id}`, alt: "some-temp-alt" }}
+  pageType="article"
+  showHeader={false}
+>
+  <div class="flex h-min items-center gap-8">
+    <GoBackButton />
+    <Button href="/news" class="h-fit"> All News </Button>
+  </div>
+  {
+    heroImage ? (
+      <div class="hero-image relative mb-16 grid aspect-video max-h-72 w-full items-center overflow-hidden rounded-t-md border-2 border-current sm:mb-24">
+        <Image src={`${DIRECTUS_URL}/assets/${heroImage.id}`} alt="temporary-alt" width="2000" height="2000" class="absolute" />
+      </div>
+    ) : null
+  }
+  <article class="mb-16 border-b-2 border-current pb-16 sm:mb-24">
+    <header class="mb-8">
+      <h1 class="font-serif text-3xl font-medium leading-tight sm:text-5xl sm:leading-tight">{title}</h1>
+    </header>
+    <div class="prose prose-txtcolors sm:prose-lg max-w-none" set:html={content} />
+    <GoBackButton />
+  </article>
+
+  {
+    (prevNewsItem || nextNewsItem) && (
+      <div class="my-4 sm:my-24">
+        <h2 class="mb-12 font-serif text-2xl sm:mb-16 sm:text-3xl">More News From Us</h2>
+        {nextNewsItem && <NewsPreview direction="next" newsItem={nextNewsItem} class="mb-10 sm:mb-12" headingLevel="h3" />}
+        {prevNewsItem && <NewsPreview direction="prev" newsItem={prevNewsItem} class="mb-10 sm:mb-12" headingLevel="h3" />}
+      </div>
+    )
+  }
+</BaseLayout>

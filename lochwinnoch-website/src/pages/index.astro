@@ -1,68 +1,55 @@
 ---
-import { getCollection } from "astro:content";
-import { sortItemsByDateDesc } from "../utils/data-utils";
-
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Hero from "../components/Hero.astro";
-import LoadingDots from "../components/LoadingDots.astro";
 import ProjectPreview from "../components/ProjectPreview.astro";
 import NewsCarousel from "../components/react/EmblaCarousel.tsx";
 
 import siteConfig from "../data/site-config";
 
-const projects = (await getCollection("projects")).sort(sortItemsByDateDesc as any);
-const featuredProjects = projects.filter(({ data }) => data.isFeatured);
-console.log(featuredProjects.length);
+import { fetchProjects, fetchNews, sortDirectusByDate as sorter } from "../utils/directus-utils";
 
-// get minimum data that needs to be sent to client for react component
-const news = (await getCollection("news")).slice(0, 3).sort(sortItemsByDateDesc as any);
-let newsReducedData: any = [];
-if (news.length > 0) {
-  newsReducedData = news.map((newsItem: any) => {
-    return {
-      id: newsItem.id,
-      image: newsItem.data.featureImage,
-      title: newsItem.data.title,
-      excerpt: newsItem.data.excerpt
-    } as any;
-  });
-}
+const projects = await fetchProjects();
+
+const featuredProjects = projects.filter((project) => project.isFeatured).sort(sorter);
+const news = await fetchNews();
+const featuredNews = news.filter((newsItem) => newsItem.isFeatured);
+
+const DIRECTUS_URL: string | undefined = import.meta.env.DIRECTUS_URL;
 ---
 
 <BaseLayout description={siteConfig.description} image={siteConfig.image}>
-  <LoadingDots />
-  <Hero />
+  <Hero isGreeting />
   <div class="relative">
     <div id="carousel-placeholder" class="absolute inset-4 bg-transparent">
-      <div class="my-4 h-12 w-5/12 animate-pulse rounded-md bg-muted opacity-25"></div>
-      <div class="my-4 h-12 w-11/12 animate-pulse rounded-md bg-muted opacity-25"></div>
-      <div class="my-4 aspect-video w-full animate-pulse rounded-md bg-muted opacity-25"></div>
-      <div class="my-4 h-12 w-11/12 animate-pulse rounded-md bg-muted opacity-25"></div>
+      <div class="bg-muted my-4 h-12 w-5/12 animate-pulse rounded-md opacity-25"></div>
+      <div class="bg-muted my-4 h-12 w-11/12 animate-pulse rounded-md opacity-25"></div>
+      <div class="bg-muted my-4 aspect-video w-full animate-pulse rounded-md opacity-25"></div>
+      <div class="bg-muted my-4 h-12 w-11/12 animate-pulse rounded-md opacity-25"></div>
       <div class="my-4 flex h-12 w-fit gap-8 py-2">
-        <div class="h-full w-32 animate-pulse rounded-md bg-muted opacity-25"></div>
-        <div class="h-full w-32 animate-pulse rounded-md bg-muted opacity-25"></div>
+        <div class="bg-muted h-full w-32 animate-pulse rounded-md opacity-25"></div>
+        <div class="bg-muted h-full w-32 animate-pulse rounded-md opacity-25"></div>
       </div>
     </div>
     <div id="placeholder-spacer" class="h-[41rem] bg-transparent sm:h-[51rem]"></div>
-    <NewsCarousel news={newsReducedData} client:only="react" />
-
-    <div class="ml-4 mr-auto mt-12 w-fit sm:mt-16">
-      <Button href="/projects">See All News</Button>
+    <NewsCarousel news={featuredNews} assetUrl={`${DIRECTUS_URL}/assets/`} client:only="react" />
+    <div class="ml-4 mr-auto mt-12 w-full border-b-2 border-current pb-8 sm:mt-16">
+      <Button class="w-fit" href="/news">See All News</Button>
     </div>
     {
       featuredProjects?.length > 0 && (
-        <div class="my-8 sm:mb-24">
-          <h2 class="mb-12 font-serif text-xl sm:mb-16 sm:text-4xl">Our Projects</h2>
+        <div class="my-8 border-b-2 border-current pb-8 sm:mb-24">
+          <h2 class="my-12 font-serif text-xl sm:mb-16 sm:text-4xl">Our Featured Projects</h2>
           {featuredProjects.map((project) => (
             <ProjectPreview project={project} class="mb-10 sm:mb-12" headingLevel="h3" />
           ))}
-          <div class="ml-4 mr-auto mt-12 w-fit sm:mt-16">
-            <Button href="/projects">See All Projects</Button>
+          <div class="full ml-4 mr-auto mt-12 sm:mt-16">
+            <Button class="w-fit" href="/projects">
+              See All Projects
+            </Button>
           </div>
         </div>
       )
     }
-    <p>test paragraph</p>
   </div>
 </BaseLayout>

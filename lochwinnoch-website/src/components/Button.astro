@@ -20,7 +20,7 @@ const buttonClasses =
       <slot />
     </a>
   ) : (
-    <HUIBtn client:visible className={[buttonClasses, className]} {...rest}>
+    <HUIBtn client:only="react" className={[buttonClasses, className]} {...rest}>
       <slot />
     </HUIBtn>
   )

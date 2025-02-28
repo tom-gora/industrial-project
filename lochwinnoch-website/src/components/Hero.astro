@@ -2,15 +2,21 @@
 import { marked } from "marked";
 import Button from "./Button.astro";
 import siteConfig from "../data/site-config";
+import LoadingDots from "./LoadingDots.astro";
 
 const hero = siteConfig.hero;
+const { isGreeting } = Astro.props;
 ---
 
 {
   (hero?.title || hero?.text || (hero?.actions && hero.actions.length > 0)) && (
     <section class="mb-4 flex w-full flex-col gap-8 sm:mb-8">
       {hero.title && <h1 class="font-serif text-5xl font-medium leading-tight sm:text-5xl sm:leading-tight">{hero.title}</h1>}
-      {hero.text && <div class="prose prose-txtcolors max-w-none  sm:prose-lg" set:html={marked.parse(hero.text)} />}
+      <div class="flex flex-col gap-1 px-4">
+        {isGreeting ? <LoadingDots /> : null}
+        {hero.text && <div class="prose prose-txtcolors max-w-none sm:prose-lg" set:html={marked.parse(hero.text)} />}
+      </div>
+
       {hero.actions && hero.actions.length > 0 && (
         <div class="flex flex-wrap gap-4">
           {hero.actions.map((action) => (

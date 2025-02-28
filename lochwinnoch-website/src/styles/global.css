@@ -15,7 +15,7 @@
     }
     @apply font-serif;
     --color-text-main: 17 46 50;
-    --color-bg-main: 197 206 208;
+    --color-bg-main: 210 217 219;
     --color-bg-muted: 175 183 185;
     --color-border-main: 34 53 54;
   }
@@ -49,13 +49,6 @@
       width: 100%;
       object-fit: cover;
     }
-    .animate-pulse::after {
-      content: "";
-      width: 1rem;
-      aspect-ratio: 1;
-      background-color: red;
-      inset: 0;
-    }
   }
 }
 
@@ -77,5 +70,13 @@
     body:has(#skip-to-main:focus-within) .loader {
       opacity: 0;
     }
+  }
+
+  .prose img {
+    @apply mx-4 max-h-[40rem] w-full rounded-md;
+  }
+  .hero-image::after {
+    content: "";
+    @apply absolute inset-0 -z-10 animate-pulse rounded-t-md bg-muted/50;
   }
 }

@@ -1,64 +1,78 @@
 ---
-title: "RoboChef - AI Powered Cooking Guide"
-description: RoboChef Recipe Assistant is a groundbreaking mobile application that leverages artificial intelligence to redefine the cooking experience.
-publishDate: "Oct 12 2023"
+title: "Lochhead Social Garden Project"
+description: Maaking progress on the Lochhead Social Garden Project.
+publishDate: "Jun 20 2024"
 isFeatured: true
+heroImage:
+  src: "/projects/project-3_featured.png"
+  alt: "Men working in a workshop"
 seo:
   image:
-    src: "/project-3.jpg"
+    src: "/projects/project-3_featured.png"
+    alt: "Men working in a workshop"
 ---
 
-![Project preview](/project-3.jpg)
+### June 2024
 
-**Note:** This case study is entirely fictional and created for the purpose of showcasing [Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/).
+Welcome to our new Lochhead Gardens Project Officer
 
-**Project Overview:**
-RoboChef Recipe Assistant is a groundbreaking mobile application that leverages artificial intelligence to redefine the cooking experience. By combining machine learning with culinary expertise, RoboChef empowers users to explore a world of flavors, improve their cooking skills, and enjoy personalized recipe recommendations.
+Hello, my name is Eilidh and I am the new Project Officer for the Lochhead Gardens Project. I previously worked as a Project Development Manager for Craft Town Scotland in West Kilbride for a number of years. During my time with The Barony Centre I managed multiple, integral community projects as well as the exhibitions and community spaces. I have experience in working with various groups of volunteers- we simply couldn’t run the community without you. I look forward to getting to know you all as the project unfolds and making Lochhead Gardens a beautiful community space for all to enjoy.
 
-## Objectives
+### April 2024
 
-1. Develop a user-friendly mobile app that utilizes AI to provide personalized recipe suggestions based on user preferences, dietary restrictions, and available ingredients.
-2. Create an interactive cooking guide that assists users with step-by-step instructions, cooking tips, and real-time assistance.
-3. Implement a smart learning system that refines recommendations over time, adapting to users' taste preferences and dietary changes.
+We have just received significant funding from a 3 year award from the National Lottery Community Fund and the Renfrewshire Council Sustainable Communities Fund to help us take forward the development of the garden site. These monies will enable us to make some real progress with the basic groundworks before moving on to the installation of some of the buildings and facilities as initially planned.
 
-## Features
+<div style="columns: min(22rem, 72vw); margin-block: 2rem">
 
-1. **AI-Powered Recipe Recommendations:**
+![Project preview](/projects/project-3_01.png)
 
-- RoboChef analyzes users' taste preferences, dietary restrictions, and ingredient availability to suggest personalized recipes.
-- Machine learning algorithms continuously learn from user interactions, refining recommendations for an increasingly tailored experience.
+![Project preview](/projects/project-3_02.png)
 
-2. **Ingredient Scanner and Inventory Management:**
+![Project preview](/projects/project-3_03.png)
 
-- Users can scan their pantry and refrigerator using the app's built-in ingredient scanner.
-- RoboChef provides recipe suggestions based on available ingredients and helps users manage their inventory by suggesting recipes that utilize soon-to-expire items.
+![Project preview](/projects/project-3_04.jpg)
 
-3. **Step-by-Step Cooking Guide:**
+</div>
+ 
+### March 2024
+We are delighted to announce that, thanks to funding from the Greater Renfrewshire and Inverclyde Local Action Group and Renfrewshire Council Villages Investment Fund, water & waste have been connected to the site in preparation for connection to the Toilet/Storage when built in the coming weeks.
 
-- Each recipe includes a detailed step-by-step cooking guide with interactive multimedia elements.
-- Users can watch video tutorials, view images, and receive real-time tips from RoboChef as they progress through each cooking stage.
+A Community update leaflet can be viewed here
 
-4. **Nutritional Insights and Meal Planning:**
+LCDT has been working on the Lochhead Avenue site for three years. During the Covid crisis we installed over 20 raised beds for growing vegetables to support residents who were unable to access shops. This has now evolved into a space which hosts the Lochwinnoch Community Larder operated by a local charity LEAP, which has become a thriving hub of community activity, offering dignified food provision to over 900 people in the area. Their project receives surplus food from supermarkets and redistributes it to the community. LEAP has also used it as a site for outdoor workshops during the Feel Good Festivals.
 
-- RoboChef provides nutritional information for each recipe, helping users make informed decisions about their meals.
-- The app offers meal planning features, allowing users to create weekly menus based on dietary goals and preferences.
+A number of other groups also use the site, including Wildcare, a Social Enterprise holiday club offering outdoor childcare during school holidays, Lochwinnoch Force For Nature, a local biodiversity group which uses the site for growing sacrificial crops for wildlife and a local Home Education group which has social meet-ups on the site.
 
-5. **Voice-Activated Assistance:**
+### What we plan to do:
 
-- Users can interact with RoboChef using voice commands for a hands-free cooking experience.
-- The AI assistant responds to queries, provides cooking tips, and adapts recipes based on user preferences.
+To find out the priorities of the community and residents we held several community consultations which identified a number of potential ideas. We then commissioned a professional landscape designer who produced a bold and imaginative plan based on these ideas (outlined below).
 
-## Technology Stack
+We do not want to overdevelop this site. The main features of the plan are:
 
-- Frontend: Flutter for a seamless cross-platform mobile app experience.
-- Backend: Django for handling server-side logic and API integration.
-- Database: PostgreSQL for efficient data storage and retrieval.
-- AI Integration: TensorFlow for machine learning models powering recipe recommendations.
+#### The Hub
 
-> Ethan Donovan possesses a rare blend of technical expertise and creative flair. They skillfully transformed our vague ideas into a visually stunning and highly functional website. The end result exceeded our expectations, and we continue to receive compliments on the design and user experience.
+The Community Larder and smaller cabin, providing a meeting/consultation room for hire, will continue to offer a welcoming entrance. Planned is a larger seating area here with tables and a pizza oven, and a toilet block on the other side of the entrance.
 
-## Outcome
+#### Market / Large Event Space
 
-RoboChef Recipe Assistant has revolutionized the way users approach cooking, making it an enjoyable and educational experience. The AI-powered features not only simplify the cooking process but also contribute to users' culinary growth, creating a personalized and evolving cooking journey.
+From the entrance hub, the main route will lead to the centre of the garden where a large open space is provided for markets. The types of markets suggested are farmer’s markets, zero waste, food and craft fairs. Next to the central open space a large covered wood structure will offer an undercover space for workshops, gatherings, meetings or informal seating.
 
-**Note:** This case study is entirely fictional and created for the purpose of showcasing [Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/).
+#### Play / Workshops / Education
+
+From this open space, paths lead to quiet seating spaces settled amongst the trees, and a deck that can be used for open-air yoga classes or home education outdoors. A raised walkway will form part of the main pathway to the south of the site through the existing trees, offering dry footing over what can be sporadically wet ground leading onto an open greenspace which can continue to be used by Wildcare and home education groups. A sensory maze nearby will offer plants to stimulate the senses. Some of these areas will be available for hire for kids parties along with equipment such as bell tents and inflatables.
+
+#### Growing Vegetables and Fruit
+
+A growing space could be used for community growing in some capacity. The raised beds of a variety of sizes and shapes suitable for different ages and mobilities could be for growing annual veg, perennial veg and/or for a soft-fruit cage. We will potentially build a polytunnel or polycrub, and look at supporting seed saving initiatives here.
+
+#### Pond & Wildlife
+
+A large pond surrounded by a beach and planting areas will offer a different type of habitat encouraging more wildlife to use the site. The adjacent bramble grove will retain a large patch of brambles that are an essential shelter and food source for birds as well as a large variety of species. Brambles can also be eaten by people who use the garden. A significant area has been set aside for long grass and wildflower plants and much of the southwest boundary will be left with the existing undisturbed vegetation.
+
+#### Community Orchard
+
+An orchard for fruit trees, such as apples, cherries, pears, & plums will be set within a meadow. Within the orchard, benches and picnic tables create an informal place for eating or meeting, or a place just to enjoy the buzz of meadow.
+
+We think this is a unique and exciting opportunity to enhance the environment of the village. We are keen to hear from you if you have any queries or comments: lochwinnochtrust@gmail.com.
+
+You can view our full Project Plan here: LOCHHEAD GARDENS – GOVERNING DOCUMENT
