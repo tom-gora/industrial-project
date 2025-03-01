@@ -1,6 +1,6 @@
 ---
 title: "Lochhead Social Garden Project"
-description: Maaking progress on the Lochhead Social Garden Project.
+description: Making progress on the Lochhead Social Garden Project.
 publishDate: "Jun 20 2024"
 isFeatured: true
 heroImage:

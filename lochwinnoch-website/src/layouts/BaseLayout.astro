@@ -22,11 +22,10 @@ const { showHeader = true, ...head } = Astro.props;
     <ClientRouter />
   </head>
   <body class="max-w-[100dvw] overflow-x-clip bg-main text-main">
-    <!-- TODO: WHAAAA? FINISH THIS-->
     <SkipToMain />
     <div class="flex min-h-screen flex-col px-4 md:px-8">
       <Nav />
-      <main id="main-content" tabindex="-1" class="mx-auto mt-8 w-full max-w-3xl grow pl-4 pr-8 sm:mt-48 sm:pl-0 sm:pr-0">
+      <main id="main-content" tabindex="-1" class="mx-auto mt-8 w-full max-w-4xl grow pl-4 pr-8 sm:mt-48 sm:pl-0 sm:pr-0">
         <slot />
       </main>
       <Footer />

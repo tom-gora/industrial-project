@@ -9,6 +9,9 @@ module.exports = {
       serif: ["EB Garamond Variable", ...defaultTheme.fontFamily.serif]
     },
     extend: {
+      textDecorationColor: {
+        main: "rgb(var(--color-text-main) / <alpha-value>)"
+      },
       ringColor: {
         main: "rgb(var(--color-text-main) / <alpha-value>)",
         subtle: "rgb(var(--color-bg-muted) / <alpha-value>)"
@@ -94,5 +97,10 @@ module.exports = {
       })
     }
   },
+  safelist: [
+    {
+      pattern: /^delay-/
+    }
+  ],
   plugins: [require("@tailwindcss/typography")]
 };

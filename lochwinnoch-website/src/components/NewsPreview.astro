@@ -4,12 +4,12 @@ import ArrowRight from "../icons/ArrowRight.astro";
 import ArrowLeft from "../icons/ArrowLeft.astro";
 
 type Props = { direction: string; newsItem: NewsItem; class?: string; headingLevel?: "h2" | "h3" | "h4" | "h5" | "h6" };
-const { direction, newsItem, class: className, headingLevel = "h2" } = Astro.props;
+const { style, direction, newsItem, class: className, headingLevel = "h2" } = Astro.props;
 const { title, excerpt, slug } = newsItem;
 const TitleTag = headingLevel;
 ---
 
-<a class:list={["flex justify-between items-start gap-8 group", className]} href={`/news/${slug}`}>
+<a style={style} class:list={["opacity-0 animate-fade-in-left flex justify-between items-start gap-8 group", className]} href={`/news/${slug}`}>
   <div class="grow">
     <TitleTag
       class="font-serif text-xl font-medium leading-tight group-hover:underline group-hover:decoration-dashed group-hover:decoration-1 group-hover:underline-offset-4 sm:text-2xl"

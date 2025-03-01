@@ -5,30 +5,28 @@ import Hero from "../components/Hero.astro";
 import ProjectPreview from "../components/ProjectPreview.astro";
 import NewsCarousel from "../components/react/EmblaCarousel.tsx";
 
-import siteConfig from "../data/site-config";
+import { fetchProjects, fetchNews, getConfig, sortDirectusByDate as sorter } from "../utils/directus-utils";
 
-import { fetchProjects, fetchNews, sortDirectusByDate as sorter } from "../utils/directus-utils";
+const DIRECTUS_URL: string | undefined = import.meta.env.DIRECTUS_URL;
 
+const siteConfig = await getConfig();
 const projects = await fetchProjects();
-
 const featuredProjects = projects.filter((project) => project.isFeatured).sort(sorter);
 const news = await fetchNews();
 const featuredNews = news.filter((newsItem) => newsItem.isFeatured);
-
-const DIRECTUS_URL: string | undefined = import.meta.env.DIRECTUS_URL;
 ---
 
 <BaseLayout description={siteConfig.description} image={siteConfig.image}>
   <Hero isGreeting />
   <div class="relative">
     <div id="carousel-placeholder" class="absolute inset-4 bg-transparent">
-      <div class="bg-muted my-4 h-12 w-5/12 animate-pulse rounded-md opacity-25"></div>
-      <div class="bg-muted my-4 h-12 w-11/12 animate-pulse rounded-md opacity-25"></div>
-      <div class="bg-muted my-4 aspect-video w-full animate-pulse rounded-md opacity-25"></div>
-      <div class="bg-muted my-4 h-12 w-11/12 animate-pulse rounded-md opacity-25"></div>
+      <div class="my-4 h-12 w-5/12 animate-pulse rounded-md bg-muted opacity-25"></div>
+      <div class="my-4 h-12 w-11/12 animate-pulse rounded-md bg-muted opacity-25"></div>
+      <div class="my-4 aspect-video w-full animate-pulse rounded-md bg-muted opacity-25"></div>
+      <div class="my-4 h-12 w-11/12 animate-pulse rounded-md bg-muted opacity-25"></div>
       <div class="my-4 flex h-12 w-fit gap-8 py-2">
-        <div class="bg-muted h-full w-32 animate-pulse rounded-md opacity-25"></div>
-        <div class="bg-muted h-full w-32 animate-pulse rounded-md opacity-25"></div>
+        <div class="h-full w-32 animate-pulse rounded-md bg-muted opacity-25"></div>
+        <div class="h-full w-32 animate-pulse rounded-md bg-muted opacity-25"></div>
       </div>
     </div>
     <div id="placeholder-spacer" class="h-[41rem] bg-transparent sm:h-[51rem]"></div>

@@ -72,11 +72,24 @@
     }
   }
 
-  .prose img {
-    @apply mx-4 max-h-[40rem] w-full rounded-md;
-  }
   .hero-image::after {
     content: "";
     @apply absolute inset-0 -z-10 animate-pulse rounded-t-md bg-muted/50;
+  }
+
+  .animate-fade-in-left {
+    animation: fadeInFromLeft 0.5s ease-in-out forwards;
+    animation-delay: var(--fade-in-delay);
+  }
+
+  @keyframes fadeInFromLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }

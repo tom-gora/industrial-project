@@ -2,6 +2,8 @@
 import siteConfig from "../data/site-config";
 import "../styles/global.css";
 
+const DIRECTUS_URL: string = import.meta.env.DIRECTUS_URL;
+
 export type Props = {
   title?: string;
   description?: string;
@@ -9,7 +11,7 @@ export type Props = {
   pageType?: "website" | "article";
 };
 
-const { description = "", image = siteConfig.image, pageType = "website" } = Astro.props;
+const { description = "", image = `${DIRECTUS_URL}/assets/3d8b2a93-c51a-468a-b020-1a92c2c3c364.jpg?key=seo-thumbnailize`, pageType = "website" } = Astro.props;
 const title = [Astro.props.title, siteConfig.title].filter(Boolean).join(" | ");
 const resolvedImage = image?.src
   ? {

@@ -1,30 +1,25 @@
 ---
-import type { GetStaticPathsOptions, Page } from "astro";
-import { type CollectionEntry, getCollection } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
 import Pagination from "../../components/Pagination.astro";
-import ProjectPreview from "../../components/ProjectPreview.astro";
-import siteConfig from "../../data/site-config";
-import { sortItemsByDateDesc } from "../../utils/data-utils";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectsPreview from "../../components/ProjectPreview.astro";
+import { sortDirectusByDate as sorter } from "../../utils/directus-utils";
+import type { Project } from "../../utils/directus";
+import { fetchProjects, setPagination, getConfig } from "../../utils/directus-utils";
 
-export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const projects = (await getCollection("projects")).sort(sortItemsByDateDesc);
-  return paginate(projects, { pageSize: siteConfig.projectsPerPage || 6 });
-}
+const config = await getConfig();
+const projectsPerPage = config.projectsPerPage;
 
-type Props = { page: Page<CollectionEntry<"projects">> };
+const projects: Project[] = await fetchProjects().then((p) => p.sort(sorter));
+const currentUrl = new URL(Astro.request.url);
 
-const { page } = Astro.props;
-const projectList = page.data;
+const paginationParams = setPagination(projects, projectsPerPage, currentUrl);
+const { slice, current, last, prev, next } = paginationParams;
+
+const page = { url: { next: next, prev: prev }, current, last };
 ---
 
-<BaseLayout
-  title="LCDT Projects"
-  description="Explore a diverse portfolio showcasing my passion and expertise"
-  image={{ src: "/dante-preview.jpg", alt: "The preview of the site" }}
-  showHeader={false}
->
-  <h1 class="mb-12 font-serif text-2xl leading-tight sm:mb-16 sm:text-4xl">Projects</h1>
-  {projectList.map((project) => <ProjectPreview project={project} class="mb-10 sm:mb-12" />)}
-  <Pagination page={page} class="my-16 sm:my-24" />
+<BaseLayout title="LCDT News" description="Read the latest news from us" image={{ src: "placeholder", alt: "some-temp-alt" }} showHeader={false}>
+  <h1 class="mb-12 font-serif text-2xl leading-tight sm:mb-16 sm:text-4xl">Recent news from us</h1>
+  {slice.map((n: any, index: number) => <ProjectsPreview direction="next" style=`--fade-in-delay: ${(index + 1) * 100}ms`  project={n} class="mb-10 sm:mb-12" headingLevel="h3" />)}
+  {projects.length > projectsPerPage && <Pagination page={page} class="my-16 sm:my-24" />}
 </BaseLayout>

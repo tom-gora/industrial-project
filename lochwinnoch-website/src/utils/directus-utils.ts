@@ -1,9 +1,9 @@
 import type { NewsItem, Project, Schema } from "./directus";
-import { createDirectus, readItems, rest } from "@directus/sdk";
+import { createDirectus, readItems, readSingleton, rest } from "@directus/sdk";
 
 const DIRECTUS_URL: string = import.meta.env.DIRECTUS_URL;
 
-// types:
+// declare fields retrieved from cms for each collection
 
 const publicProjectsDataScope = {
   fields: [
@@ -38,6 +38,21 @@ const publicNewsDataScope = {
   ]
 };
 
+const siteConfigDataScope = {
+  fields: [
+    "headerNavLinks",
+    "footerNavLinks",
+    "socialLinks",
+    "title",
+    "description",
+    { logo: ["id", "description"] },
+    { image: ["id", "description"] },
+    { hero: ["title", "text"] },
+    "newsPerPage",
+    "projectsPerPage"
+  ]
+};
+
 // getters:
 
 const directusClient = createDirectus<Schema>(DIRECTUS_URL).with(rest());
@@ -52,7 +67,12 @@ const fetchNews = async () => {
   return (await directusClient.request(readItems("news", publicNewsDataScope))) as NewsItem[];
 };
 
-//data utils
+const getConfig = async () => {
+  if (!DIRECTUS_URL) return [];
+  return (await directusClient.request(readSingleton("site_config", siteConfigDataScope))) as any;
+};
+
+// data helpers:
 
 const sortDirectusByDate = (itemA: NewsItem | Project, itemB: NewsItem | Project) => {
   const valA = itemA.date_updated ?? itemA.date_created;
@@ -61,4 +81,20 @@ const sortDirectusByDate = (itemA: NewsItem | Project, itemB: NewsItem | Project
   return new Date(valB).getTime() - new Date(valA).getTime();
 };
 
-export { fetchProjects, fetchNews, sortDirectusByDate };
+const setPagination = (collection: NewsItem[] | Project[], limit: number, currentUrl: URL) => {
+  const count = collection.length;
+  const lastPage = Math.ceil(count / limit);
+  const currentPage = parseInt(currentUrl.searchParams.get("page") || "1");
+  const startIndex = (currentPage - 1) * limit;
+  const endIndex = Math.min(startIndex + limit, count);
+  const currentBatch: NewsItem[] | Project[] = collection.slice(startIndex, endIndex);
+  return {
+    slice: currentBatch,
+    current: currentPage,
+    last: lastPage,
+    prev: currentPage > 1 ? currentPage - 1 : null,
+    next: currentPage < lastPage ? currentPage + 1 : null
+  };
+};
+
+export { fetchProjects, fetchNews, getConfig, setPagination, sortDirectusByDate };

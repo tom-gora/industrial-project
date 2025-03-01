@@ -2,31 +2,24 @@
 import Pagination from "../../components/Pagination.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import NewsPreview from "../../components/NewsPreview.astro";
-import Image from "astro/components/Image.astro";
 import { sortDirectusByDate as sorter } from "../../utils/directus-utils";
 import type { NewsItem } from "../../utils/directus";
-import { fetchNews } from "../../utils/directus-utils";
+import { fetchNews, setPagination, getConfig } from "../../utils/directus-utils";
 
-const news = await fetchNews().then((n) => n.sort(sorter));
-//
-//TODO: to put into site config
-const newsPerPage = 4;
-const newsCount = news.length;
+const config = await getConfig();
+const newsPerPage = config.newsPerPage;
+
+const news: NewsItem[] = await fetchNews().then((n) => n.sort(sorter));
 const currentUrl = new URL(Astro.request.url);
-const lastPage = Math.ceil(newsCount / newsPerPage);
-const currentPage = parseInt(currentUrl.searchParams.get("page") || "1");
-const startIndex = (currentPage - 1) * newsPerPage;
-const endIndex = Math.min(startIndex + newsPerPage, newsCount);
-const currentBatch = news.slice(startIndex, endIndex);
 
-const prevPage = currentPage > 1 ? currentPage - 1 : null;
-const nextPage = currentPage < lastPage ? currentPage + 1 : null;
+const paginationParams = setPagination(news, newsPerPage, currentUrl);
+const { slice, current, last, prev, next } = paginationParams;
 
-const page = { url: { next: nextPage, prev: prevPage }, currentPage, lastPage };
+const page = { url: { next: next, prev: prev }, current, last };
 ---
 
-<BaseLayout title="LCDT News" description="Read the latest news from us" image={{ src: null, alt: "some-temp-alt" }} showHeader={false}>
+<BaseLayout title="LCDT News" description="Read the latest news from us" image={{ src: "placeholder", alt: "some-temp-alt" }} showHeader={false}>
   <h1 class="mb-12 font-serif text-2xl leading-tight sm:mb-16 sm:text-4xl">Recent news from us</h1>
-  {currentBatch.map((n: NewsItem) => <NewsPreview direction="next" newsItem={n} class="mb-10 sm:mb-12" headingLevel="h3" />)}
-  {newsCount > newsPerPage && <Pagination page={page} class="my-16 sm:my-24" />}
+  {slice.map((n: any, index: number) => <NewsPreview direction="next" style=`--fade-in-delay: ${(index + 1) * 100}ms` newsItem={n} class="mb-10 sm:mb-16" headingLevel="h3" />)}
+  {news.length > newsPerPage && <Pagination page={page} class=" delamy-16 sm:my-24" />}
 </BaseLayout>

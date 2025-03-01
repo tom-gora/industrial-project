@@ -6,7 +6,7 @@ type Global = {
 type Image = {
   id: string;
   src: string;
-  alt?: string;
+  description?: string;
 };
 
 type Project = {

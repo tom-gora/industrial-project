@@ -1,3 +1,5 @@
+const DIRECTUS_URL: string = import.meta.env.DIRECTUS_URL;
+
 export type Image = {
   src: string;
   alt?: string;
@@ -16,12 +18,6 @@ export type Hero = {
   actions?: Link[];
 };
 
-export type Subscribe = {
-  title?: string;
-  text?: string;
-  formUrl: string;
-};
-
 export type SiteConfig = {
   logo?: Image;
   title: string;
@@ -32,9 +28,7 @@ export type SiteConfig = {
   footerNavLinks?: Link[];
   socialLinks?: Link[];
   hero?: Hero;
-  aboutHero?: Hero;
-  subscribe?: Subscribe;
-  postsPerPage?: number;
+  newsPerPage?: number;
   projectsPerPage?: number;
 };
 
@@ -44,8 +38,8 @@ const siteConfig: SiteConfig = {
   description:
     "The official website of Lochwinnoch Community Development Trust, a non-profit organization supporting our vibrant village community in Renfrewshire.",
   image: {
-    src: "/dante-preview.jpg",
-    alt: "Dante - Astro.js and Tailwind CSS theme"
+    src: `${DIRECTUS_URL}/assets/3d8b2a93-c51a-468a-b020-1a92c2c3c364.jpg?key=seo-thumbnailize`,
+    alt: "A brand collage of photos relating to projects worked on by the Lochwinnoch Community Development Trust"
   },
   headerNavLinks: [
     {
@@ -105,26 +99,8 @@ const siteConfig: SiteConfig = {
     title: "Lochwinnoch Community Development Trust",
     text: "Welcome to **LCDT**'s webpage."
   },
-  aboutHero: {
-    title: "About Lochwinnoch Community Development Trust",
-    image: {
-      src: "/images/hero-no-bg.png",
-      alt: "A collage of four photographs. The images depict gardening beds, two children walking through the woods, an evening lakeside scene with swans and a playground area."
-    },
-    actions: [
-      {
-        text: "Get in Touch",
-        href: "/contact"
-      }
-    ]
-  },
-  subscribe: {
-    title: "Subscribe to Dante Newsletter",
-    text: "One update per week. All the latest posts directly in your inbox.",
-    formUrl: "#"
-  },
-  postsPerPage: 8,
-  projectsPerPage: 8
+  newsPerPage: 3,
+  projectsPerPage: 3
 };
 
 export default siteConfig;

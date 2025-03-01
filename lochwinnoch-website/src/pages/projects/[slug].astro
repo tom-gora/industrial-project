@@ -1,35 +1,35 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import NewsPreview from "../../components/NewsPreview.astro";
+import ProjectPreview from "../../components/ProjectPreview.astro";
 import GoBackButton from "../../components/GoBackButton.astro";
 import Button from "../../components/Button.astro";
 import Image from "astro/components/Image.astro";
 
-import type { NewsItem } from "../../utils/directus";
-import { fetchNews } from "../../utils/directus-utils";
+import type { Project } from "../../utils/directus";
+import { fetchProjects } from "../../utils/directus-utils";
 
 const { slug } = Astro.params;
 
-const news = await fetchNews();
-const newsCount = news.length;
+const projects = await fetchProjects();
+const projectsCount = projects.length;
 
-const newsItem = news.find((newsItem) => newsItem.slug === slug);
-if (!newsItem) return Astro.redirect("/404");
-const foundIndex = news.findIndex((item) => item === newsItem);
+const project = projects.find((project) => project.slug === slug);
+if (!project) return Astro.redirect("/404");
+const foundIndex = projects.findIndex((item) => item === project);
 
-const prevNewsItem = foundIndex + 1 !== newsCount ? news[foundIndex + 1] : null;
-const nextNewsItem = foundIndex !== 0 ? news[foundIndex - 1] : null;
+const prevProject = foundIndex + 1 !== projectsCount ? projects[foundIndex + 1] : null;
+const nextProject = foundIndex !== 0 ? projects[foundIndex - 1] : null;
 
-const { title, excerpt, heroImage, content } = newsItem;
+const { title, description, heroImage, content } = project;
 
-type Props = { onClick?: Function; newsItem: NewsItem; prevNewsItem: NewsItem; nextNewsItem: NewsItem; direction: string };
+type Props = { onClick?: Function; project: Project; prevProject: Project; nextProject: Project; direction: string };
 
 const DIRECTUS_URL: string | undefined = import.meta.env.DIRECTUS_URL;
 ---
 
 <BaseLayout
   title={title}
-  description={excerpt}
+  description={description}
   image={{ src: `${DIRECTUS_URL}/assets/${heroImage?.id}`, alt: "some-temp-alt" }}
   pageType="article"
   showHeader={false}
@@ -54,11 +54,11 @@ const DIRECTUS_URL: string | undefined = import.meta.env.DIRECTUS_URL;
   </article>
 
   {
-    (prevNewsItem || nextNewsItem) && (
+    (prevProject || nextProject) && (
       <div class="my-4 sm:my-24">
-        <h2 class="mb-12 font-serif text-2xl sm:mb-16 sm:text-3xl">More News From Us</h2>
-        {nextNewsItem && <NewsPreview direction="next" newsItem={nextNewsItem} class="mb-10 sm:mb-12" headingLevel="h3" />}
-        {prevNewsItem && <NewsPreview direction="prev" newsItem={prevNewsItem} class="mb-10 sm:mb-12" headingLevel="h3" />}
+        <h2 class="mb-12 font-serif text-2xl sm:mb-16 sm:text-3xl">More Projects</h2>
+        {nextProject && <ProjectPreview direction="next" project={nextProject} class="mb-10 sm:mb-12" headingLevel="h3" />}
+        {prevProject && <ProjectPreview direction="prev" project={prevProject} class="mb-10 sm:mb-12" headingLevel="h3" />}
       </div>
     )
   }
