@@ -19,6 +19,7 @@ type Project = {
   heroImage: Image | null;
   description: string;
   isFeatured: boolean;
+  isPublished: boolean;
   content: string;
   slug?: string;
 };
@@ -33,6 +34,20 @@ type NewsItem = {
   heroImage: Image | null;
   excerpt: string;
   isFeatured: boolean;
+  isPublished: boolean;
+  content: string;
+  slug?: string;
+};
+
+type AboutItem = {
+  id: number;
+  user_created: string;
+  date_created: Date;
+  user_updated: string;
+  date_updated: Date;
+  title: string;
+  heroImage: Image | null;
+  isPublished: boolean;
   content: string;
   slug?: string;
 };
@@ -41,6 +56,7 @@ type Schema = {
   global: Global;
   projects: Project[];
   news: NewsItem[];
+  aboutItems: AboutItem[];
 };
 
-export type { Global, Image, Project, Schema, NewsItem };
+export type { Global, Image, Project, NewsItem, AboutItem, Schema };

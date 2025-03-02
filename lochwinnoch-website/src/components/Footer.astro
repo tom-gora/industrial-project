@@ -1,15 +1,16 @@
 ---
-import siteConfig from "../data/site-config";
+import { getConfig } from "../utils/directus-utils";
+const siteConfig = await getConfig();
 
 const socialLinks = siteConfig.socialLinks || [];
 const navLinks = siteConfig.footerNavLinks || [];
 ---
 
-<footer class="w-full max-w-3xl mx-auto pt-12 pb-10 sm:pt-24 sm:pb-14">
+<footer class="mx-auto w-full max-w-3xl pb-10 pt-12 sm:pb-14 sm:pt-24">
   {
     navLinks.length > 0 && (
       <div class="mb-4 flex flex-wrap gap-x-6 gap-y-1">
-        {navLinks.map((link) => (
+        {navLinks.map((link: any) => (
           <a class="font-serif hover:underline hover:underline-offset-2" href={link.href}>
             {link.text}
           </a>
@@ -26,7 +27,7 @@ const navLinks = siteConfig.footerNavLinks || [];
     {
       socialLinks.length > 0 && (
         <div class="flex flex-wrap gap-x-4 gap-y-1">
-          {socialLinks.map((link) => (
+          {socialLinks.map((link: any) => (
             <a
               class="inline-flex items-center justify-center text-sm hover:underline hover:underline-offset-2"
               href={link.href}

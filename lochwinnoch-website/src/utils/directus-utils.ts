@@ -1,42 +1,9 @@
-import type { NewsItem, Project, Schema } from "./directus";
+import type { AboutItem, NewsItem, Project, Schema } from "./directus";
 import { createDirectus, readItems, readSingleton, rest } from "@directus/sdk";
 
 const DIRECTUS_URL: string = import.meta.env.DIRECTUS_URL;
 
 // declare fields retrieved from cms for each collection
-
-const publicProjectsDataScope = {
-  fields: [
-    "id",
-    "title",
-    "description",
-    "content",
-    "isFeatured",
-    "slug",
-    "date_created",
-    "date_updated",
-    {
-      heroImage: ["id", "description"]
-    }
-  ]
-};
-
-const publicNewsDataScope = {
-  fields: [
-    "id",
-    "title",
-    "excerpt",
-    "content",
-    "isFeatured",
-    "tags",
-    "slug",
-    "date_created",
-    "date_updated",
-    {
-      heroImage: ["id", "description"]
-    }
-  ]
-};
 
 const siteConfigDataScope = {
   fields: [
@@ -53,23 +20,82 @@ const siteConfigDataScope = {
   ]
 };
 
-// getters:
+const publicProjectsDataScope = {
+  fields: [
+    "id",
+    "title",
+    "description",
+    "content",
+    "isFeatured",
+    "isPublished",
+    "slug",
+    "date_created",
+    "date_updated",
+    {
+      heroImage: ["id", "description"]
+    }
+  ]
+};
 
+const publicNewsDataScope = {
+  fields: [
+    "id",
+    "title",
+    "excerpt",
+    "content",
+    "tags",
+    "isFeatured",
+    "isPublished",
+    "slug",
+    "date_created",
+    "date_updated",
+    {
+      heroImage: ["id", "description"]
+    }
+  ]
+};
+
+const aboutDataScope = {
+  fields: [
+    "id",
+    "title",
+    "content",
+    "isPublished",
+    "slug",
+    "date_created",
+    "date_updated",
+    {
+      heroImage: ["id", "description"]
+    }
+  ]
+};
+
+// instantiate sdk client object
 const directusClient = createDirectus<Schema>(DIRECTUS_URL).with(rest());
 
-const fetchProjects = async () => {
-  if (!DIRECTUS_URL) return [];
-  return (await directusClient.request(readItems("projects", publicProjectsDataScope))) as Project[];
-};
-
-const fetchNews = async () => {
-  if (!DIRECTUS_URL) return [];
-  return (await directusClient.request(readItems("news", publicNewsDataScope))) as NewsItem[];
-};
+// getters filtering out unpublished content:
 
 const getConfig = async () => {
   if (!DIRECTUS_URL) return [];
   return (await directusClient.request(readSingleton("site_config", siteConfigDataScope))) as any;
+};
+
+const fetchProjects = async () => {
+  if (!DIRECTUS_URL) return [];
+  const projects = (await directusClient.request(readItems("projects", publicProjectsDataScope))) as Project[];
+  return projects.filter((p) => Boolean(p.isPublished));
+};
+
+const fetchNews = async () => {
+  if (!DIRECTUS_URL) return [];
+  const news = (await directusClient.request(readItems("news", publicNewsDataScope))) as NewsItem[];
+  return news.filter((n) => Boolean(n.isPublished));
+};
+
+const fetchAbout = async () => {
+  if (!DIRECTUS_URL) return [];
+  const aboutItems = (await directusClient.request(readItems("aboutItems", aboutDataScope))) as AboutItem[];
+  return aboutItems.filter((a) => Boolean(a.isPublished));
 };
 
 // data helpers:
@@ -97,4 +123,4 @@ const setPagination = (collection: NewsItem[] | Project[], limit: number, curren
   };
 };
 
-export { fetchProjects, fetchNews, getConfig, setPagination, sortDirectusByDate };
+export { fetchProjects, fetchNews, fetchAbout, getConfig, setPagination, sortDirectusByDate };

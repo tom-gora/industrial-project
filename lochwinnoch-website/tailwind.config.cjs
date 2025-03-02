@@ -26,7 +26,8 @@ module.exports = {
         muted: "rgb(var(--color-bg-muted) / <alpha-value>)"
       },
       borderColor: {
-        main: "rgb(var(--color-border-main) / <alpha-value>)"
+        main: "rgb(var(--color-border-main) / <alpha-value>)",
+        "text-like": "rgb(var(--color-text-main) / <alpha-value>)"
       },
       typography: (theme) => ({
         txtcolors: {

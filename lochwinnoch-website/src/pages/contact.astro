@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import { getConfig } from "../utils/directus-utils";
+
+const siteConfig = await getConfig();
+const WEB3FORMS_ACCESS_KEY: string = import.meta.env.WEB3FORMS_ACCESS_KEY;
+
+export const prerender = true;
+const requestUrl = new URL(Astro.request.url);
+const protocol = requestUrl.protocol;
+const host = requestUrl.host;
+---
+
+<BaseLayout description={siteConfig.description} image={siteConfig.image}>
+  <h1 class="mb-8 text-4xl">Contact us</h1>
+  <form class="flex flex-col gap-8" action="https://api.web3forms.com/submit" method="POST">
+    <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+    <input type="hidden" name="subject" value="New Message Submitted Through Lochwinnoch Community Development Trust Webpage" />
+    <input type="hidden" name="from_name" value="LCDT Website" />
+    <input type="hidden" name="redirect" value={`${protocol}//${host}/message-thankyou`} />
+    <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+
+    <div class="w-full px-4">
+      <div class="flex w-8/12 justify-start gap-4 pb-8">
+        <div class="w-6/12">
+          <label for="firstname_input" class="flex flex-col font-sans text-lg">
+            <span>Name</span>
+            <span class="mx-1 font-serif text-sm">First</span>
+          </label>
+          <input
+            required
+            id="firstname_input"
+            name="First name:"
+            type="text"
+            class="mt-3 block w-full rounded-lg border-none bg-text-like/5 px-3 py-1.5 font-sans text-sm/6 data-[focus-visible]:outline-2 data-[focus-visible]:-outline-offset-2 data-[focus-visible]:outline-teal-50/25"
+          />
+        </div>
+        <div class="w-6/12">
+          <label for="lastname_input" class="flex flex-col font-sans text-lg">
+            <span>&nbsp;</span>
+            <span class="mx-1 font-serif text-sm">Last</span>
+          </label>
+          <input
+            required
+            id="lastname_input"
+            name="Last name:"
+            type="text"
+            class="mt-3 block w-full rounded-lg border-none bg-text-like/5 px-3 py-1.5 font-sans text-sm/6 data-[focus-visible]:outline-2 data-[focus-visible]:-outline-offset-2 data-[focus-visible]:outline-teal-50/25"
+          />
+        </div>
+      </div>
+
+      <div class="w-8/12 pb-8">
+        <label for="email_input" class="flex flex-col font-sans text-lg">
+          <span>Email</span>
+        </label>
+        <input
+          required
+          id="email_input"
+          name="Email:"
+          type="email"
+          class="mt-3 block w-full rounded-lg border-none bg-text-like/5 px-3 py-1.5 font-sans text-sm/6 data-[focus-visible]:outline-2 data-[focus-visible]:-outline-offset-2 data-[focus-visible]:outline-teal-50/25"
+        />
+      </div>
+      <div>
+        <label for="message_input" class="flex flex-col font-sans text-lg">
+          <span>Write to us</span>
+          <span class="mx-1 font-serif text-sm">Leave us a comment or a message</span>
+        </label>
+        <textarea
+          required
+          id="message_input"
+          name="Message:"
+          class="min-h-40 mt-3 block w-full rounded-lg border-none bg-text-like/5 px-3 py-1.5 font-sans text-sm/6 data-[focus-visible]:outline-2 data-[focus-visible]:-outline-offset-2 data-[focus-visible]:outline-teal-50/25"
+          rows={3}></textarea>
+      </div>
+      <div class="h-captcha mt-8" data-captcha="true"></div>
+    </div>
+
+    <Button type="submit" class="mt-8 w-fit self-center"> Submit Message </Button>
+  </form>
+  <script src="https://web3forms.com/client/script.js" async defer></script>
+</BaseLayout>

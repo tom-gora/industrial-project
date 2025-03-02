@@ -2,8 +2,9 @@
 import NavLogo from "./NavLogo.astro";
 import NavLink from "./NavLink.astro";
 import NavControls from "./NavControls.astro";
+import { getConfig } from "../../utils/directus-utils";
 
-import siteConfig from "../../data/site-config";
+const siteConfig = await getConfig();
 const navLinks = siteConfig.headerNavLinks || [];
 ---
 

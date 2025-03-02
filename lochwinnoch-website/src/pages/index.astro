@@ -19,6 +19,7 @@ const featuredNews = news.filter((newsItem) => newsItem.isFeatured);
 <BaseLayout description={siteConfig.description} image={siteConfig.image}>
   <Hero isGreeting />
   <div class="relative">
+    { news?.length > 0 &&
     <div id="carousel-placeholder" class="absolute inset-4 bg-transparent">
       <div class="my-4 h-12 w-5/12 animate-pulse rounded-md bg-muted opacity-25"></div>
       <div class="my-4 h-12 w-11/12 animate-pulse rounded-md bg-muted opacity-25"></div>
@@ -31,9 +32,10 @@ const featuredNews = news.filter((newsItem) => newsItem.isFeatured);
     </div>
     <div id="placeholder-spacer" class="h-[41rem] bg-transparent sm:h-[51rem]"></div>
     <NewsCarousel news={featuredNews} assetUrl={`${DIRECTUS_URL}/assets/`} client:only="react" />
-    <div class="ml-4 mr-auto mt-12 w-full border-b-2 border-current pb-8 sm:mt-16">
+    <div class="ml-4 mr-auto  w-full border-b-2 border-current pb-8">
       <Button class="w-fit" href="/news">See All News</Button>
     </div>
+    }
     {
       featuredProjects?.length > 0 && (
         <div class="my-8 border-b-2 border-current pb-8 sm:mb-24">

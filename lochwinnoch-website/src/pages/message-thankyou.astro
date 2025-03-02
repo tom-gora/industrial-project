@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import GoBackButton from "../components/GoBackButton.astro";
+import { getConfig } from "../utils/directus-utils";
+
+export const prerender = true;
+const siteConfig = await getConfig();
+const DIRECTUS_URL: string | undefined = import.meta.env.DIRECTUS_URL;
+---
+
+<BaseLayout description={siteConfig.description} image={siteConfig.image}>
+  <div class="flex items-center justify-center">
+    <div class="flex flex-col items-center gap-4 space-y-6 p-8">
+      <svg class="h-16 w-16" viewBox="0 0 24 24" fill="none" stroke="rgb(var(--color-text-main))" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 13l4 4L19 7"></path>
+      </svg>
+      <h1 class="text-center text-4xl font-semibold">Your message has been sent successfully!</h1>
+      <p class="-translate-y-4 text-center text-base">Thank you! The form has been submitted successfully. We will reply to you soon!</p>
+
+      <div class="flex flex-col items-center">
+        <img src={`${DIRECTUS_URL}/assets/abc464d0-ba30-4491-ba63-88caca070e08`} class="scale-75" />
+        <h4 class="-translate-y-4 uppercase">Lochwinnoch Community Development Trust</h4>
+      </div>
+      <GoBackButton>Go Back</GoBackButton>
+    </div>
+  </div>
+</BaseLayout>

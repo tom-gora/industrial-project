@@ -39,6 +39,14 @@
     --color-bg-muted: 200 200 200;
     --color-border-main: 0 0 0;
   }
+
+  .prose img {
+    @apply rounded-md;
+  }
+
+  .prose *:is(h1, h2, h3, h4, h5, h6):first-of-type {
+    @apply mt-0 pt-0;
+  }
 }
 
 @layer components {
@@ -48,6 +56,43 @@
     img {
       width: 100%;
       object-fit: cover;
+    }
+  }
+
+  button[id*="headlessui-tabs-tab-"][data-selected] {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: auto;
+      bottom: 0;
+      height: 100%;
+      width: 2px;
+      background: rgb(var(--color-text-main));
+      @media (width < 768px) {
+        height: 2px;
+        width: 100%;
+      }
+    }
+  }
+  button[id*="headlessui-tabs-tab-"][data-selected]:focus-visible {
+    &::before {
+      z-index: 10;
+      content: "";
+      position: absolute;
+      right: -4px;
+      top: auto;
+      bottom: 0;
+      height: 100%;
+      width: 3px;
+      background: #3e8fb0;
+      @media (width < 768px) {
+        right: 0;
+        bottom: -3px;
+        height: 2px;
+        width: 100%;
+      }
     }
   }
 }

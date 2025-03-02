@@ -1,1 +1,14 @@
-<h1>hello</h1>
+---
+import { HUITabs } from "../components/react/HUITabs.tsx";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { fetchAbout, getConfig } from "../utils/directus-utils";
+
+const siteConfig = await getConfig();
+const about = await fetchAbout();
+const currentUrl = new URL(Astro.request.url);
+const currentPage = parseInt(currentUrl.searchParams.get("tab") || "0");
+---
+
+<BaseLayout description={siteConfig.description} image={siteConfig.image}>
+  <HUITabs active={currentPage} content={about} client:only="react" />
+</BaseLayout>
