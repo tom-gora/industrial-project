@@ -1,0 +1,124 @@
+---
+export const prerender = false;
+
+import { actions } from "astro:actions";
+
+let badLogin = false;
+let needsLogin;
+
+const url = new URL(Astro.request.url);
+const error = url.searchParams.get("error");
+if (error && error == "loginneeded") {
+  needsLogin = true;
+}
+const result = Astro.getActionResult(actions.validateAtGateway);
+
+const isCorrectLogin = result?.data?.auth;
+if (isCorrectLogin) {
+  Astro.session?.set("loggedIn", true);
+  return Astro.redirect("/");
+}
+if (isCorrectLogin === false) {
+  badLogin = true;
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo Login</title>
+    <style>
+      /* Minimal styling for the simple gateway page */
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        padding: 1rem 2rem;
+        width: max(300px, 50vw);
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin: 0 0 1rem;
+        text-align: center;
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      label {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+      input {
+        width: 92%;
+        padding: 8px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .login-error {
+        margin-bottom: 1rem;
+        padding: 10px;
+        border: 1px solid #e74c3c;
+        background-color: #fdecea;
+        color: #e74c3c;
+        font-size: 0.9rem;
+        border-radius: 4px;
+      }
+      button {
+        width: 50%;
+        margin-inline: auto;
+        padding: 10px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .small-text {
+        font-size: 0.8rem;
+        text-align: center;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <h1>Login to access the demo</h1>
+        <form action={actions.validateAtGateway} method="POST">
+          <div class="form-group">
+            <label for="user">User</label>
+            <input type="text" id="user" name="user" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <!-- Hidden error message box -->
+          <div id="loginNeeded" style={`display: ${needsLogin ? "block" : "none"}`} class="login-error">To access the page login is required.</div>
+          <div id="loginError" style={`display: ${badLogin ? "block" : "none"}`} class="login-error">Login error: invalid username or password.</div>
+          <button type="submit">Login</button>
+        </form>
+        <p class="small-text">
+          * The demo session will reset every hour for security purposes. Use this to explore the demo and gather feedback, but you will need to re-login after
+          this time. Thank you.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

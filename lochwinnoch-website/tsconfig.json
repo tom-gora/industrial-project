@@ -8,6 +8,7 @@
     "dist"
   ],
   "compilerOptions": {
+    "moduleResolution": "Bundler",
     "strictNullChecks": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react"

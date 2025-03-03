@@ -1,6 +1,8 @@
 ---
-import siteConfig from "../data/site-config";
+import { getConfig } from "../utils/directus-utils";
 import "../styles/global.css";
+
+const siteConfig = await getConfig();
 
 const DIRECTUS_URL: string = import.meta.env.DIRECTUS_URL;
 

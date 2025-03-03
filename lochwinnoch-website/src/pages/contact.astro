@@ -6,7 +6,6 @@ import { getConfig } from "../utils/directus-utils";
 const siteConfig = await getConfig();
 const WEB3FORMS_ACCESS_KEY: string = import.meta.env.WEB3FORMS_ACCESS_KEY;
 
-export const prerender = true;
 const requestUrl = new URL(Astro.request.url);
 const protocol = requestUrl.protocol;
 const host = requestUrl.host;

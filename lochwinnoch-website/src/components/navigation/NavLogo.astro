@@ -1,14 +1,18 @@
 ---
-import siteConfig from "../../data/site-config";
+import { getConfig } from "../../utils/directus-utils";
+
+const siteConfig = await getConfig();
+const DIRECTUS_URL: string = import.meta.env.DIRECTUS_URL;
+
 const logo = {
-  src: siteConfig?.logo?.src || "",
-  alt: siteConfig?.logo?.alt || ""
+  src: `${DIRECTUS_URL}/assets/${siteConfig?.logo?.id}` || "",
+  alt: siteConfig?.logo?.description || ""
 };
 ---
 
 <a
   href="/"
-  class="logo z-30 flex w-fit translate-x-4 flex-row-reverse flex-nowrap items-center justify-start gap-8 bg-main px-4 transition-transform duration-150 sm:-translate-x-8 sm:flex-row sm:justify-between"
+  class="logo bg-main z-30 flex w-fit translate-x-4 flex-row-reverse flex-nowrap items-center justify-start gap-8 px-4 transition-transform duration-150 sm:-translate-x-8 sm:flex-row sm:justify-between"
 >
   {
   <img src={logo.src} alt={logo.alt || ""} class="max-h-8 sm:max-h-12 md:max-h-16" />
