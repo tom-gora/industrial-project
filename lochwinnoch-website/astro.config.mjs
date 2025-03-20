@@ -37,4 +37,3 @@ export default defineConfig({
     ttl: 60 * 60
   }
 });
-

@@ -205,9 +205,9 @@
     // grab initial presets
     const amoled = (() => {
       if (typeof localStorage !== "undefined" && localStorage.getItem("amoled")) {
-        return localStorage.getItem("amoled") || "false";
+        return localStorage.getItem("amoled") || "true";
       }
-      return "true";
+      return "false";
     })();
 
     const fontSize = (() => {
@@ -244,7 +244,7 @@
     xlFontBtn?.addEventListener("click", setXlFontSize);
 
     document.addEventListener("click", (event) => {
-      if (menuBtn.contains(event.target)) return;
+      if (menuBtn?.contains(event.target)) return;
       menu?.classList.contains("menu-visible") ? hideMenuOnClickOut(menu, event) : null;
     });
   });
