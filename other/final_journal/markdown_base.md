@@ -21,7 +21,7 @@
 
 **Year:** 2025  
 **Term:** 1 and 2  
-**Coordinator:** Tom Caira  
+**Coordinator:** Tom Caira / Paul Keir  
 **Project Org:** Lochwinnoch Community Development Trust
 
 ---
@@ -287,7 +287,7 @@ This industrial project has provided not only significant technical learning but
 
 ###### Tangible Outcomes and Portfolio Development
 
-The primary tangible outcome, the redesigned website for the LLL Community Development Trust, serves as a concrete demonstration of applied skills. There exists potential to continue collaboration with the client beyond the scope of this academic module, further developing the platform based on their evolving needs. Should this not materialise, the project itself provides a robust, real-world example suitable for rebranding and inclusion in my professional portfolio. In today's competitive job market, presenting such a comprehensive project – encompassing modern frontend development with Astro, headless CMS integration using Directus, containerized deployment via Docker, and security considerations – is significantly more impactful than theoretical exercises or smaller code snippets. It showcases the ability to deliver a complete, functional product.
+The primary tangible outcome, the redesigned website for the Lochwinnoch Community Development Trust, serves as a concrete demonstration of applied skills. There exists potential to continue collaboration with the client beyond the scope of this academic module, further developing the platform based on their evolving needs. Should this not materialise, the project itself provides a robust, real-world example suitable for rebranding and inclusion in my professional portfolio. In today's competitive job market, presenting such a comprehensive project – encompassing modern frontend development with Astro, headless CMS integration using Directus, containerized deployment via Docker, and security considerations – is significantly more impactful than theoretical exercises or smaller code snippets. It showcases the ability to deliver a complete, functional product.
 
 ###### Skill Alignment with Industry Demands
 
@@ -313,7 +313,7 @@ While this project provided a valuable opportunity to engage with a modern techn
 
 #### Summary
 
-This reflective journal detailed a range of experiences from initial project planning through final deployment. Several key moments and challenges significantly shaped both the final product and my personal growth. The development journey of the LLL Community Development Trust (LCDT) website emphasized careful planning, security and importance of learning new concepts. Overall that made an interesting and impactful course.
+This reflective journal detailed a range of experiences from initial project planning through final deployment. Several key moments and challenges significantly shaped both the final product and my personal growth. The development journey of the Lochwinnoch Community Development Trust website emphasized careful planning, security and importance of learning new concepts. Overall that made an interesting and impactful course.
 
 A core element that requires analysis is feedback from the client at the time of submission.
 
@@ -343,8 +343,8 @@ This experience reinforced how professional competence directly links to public 
 <pagebreak></pagebreak>
 <spacer></spacer>
 
-
 #### Bibliography
+
 <style>
 .biblio {
    font-size: 0.8rem !important;
@@ -397,17 +397,77 @@ nodejs (2024). fetch times out in under 5 seconds · Issue #1531 · nodejs/undic
 #### Appendices
 
 ###### Appendix 1
+
 [source code]
 
 [GITHUB LINK](https://github.com/tom-gora/industrial-project)
-<br>
-<br>
-<br>
-<br>
+
+<div style="max-width:86% !important">
+
 ![Code on Github](./code.png)
-<br>
-<br>
-<br>
-<br>
+
+</div>
+
 ###### Appendix 2
-[critique feedback from the client]
+
+[demo access]
+
+[DEPLOYED PAGE DEMO LINK](https://lochwinnoch.tomgora.online/demo-access?error=loginneeded)
+
+User: _tester@lochwinnochtrust_  
+Password: TbdOgflY2svCxle
+
+[DEPLOYED CMS DEMO LINK](https://admin.lochwinnoch.tomgora.online)
+
+<div style="visibility: hidden; width: 0; height: 0; margin: 0; padding: 0; pointer-events: none;">HACK: to work as comment to explain HACK bellow preventing markdown from rendering email address as aa hyperlink</div>
+
+CMS Editor User: _editor<span>@lochwinnochtrust.org.uk</span>_  
+CMS Password: xmKR8Nz4zT5ZZE6
+
+<spacer></spacer>
+<pagebreak></pagebreak>
+<spacer></spacer>
+
+###### Appendix 3
+
+[critique and feedback as provided by the client]
+
+#### Overall Summary
+
+The website has a clean, minimalistic look but requires improvements in design, usability, and content management to enhance user engagement and accessibility. Key recommendations include optimising visual appeal, organising content clearly, and ensuring mobile compatibility. Addressing these areas will strengthen the Trust’s outreach efforts and encourage greater community support.
+
+#### Design & Usability
+
+The design is currently functional but minimalistic, making it less visually appealing. To enhance user engagement, consider breaking up large blocks of text with images or varied layouts. Standardising headers and font sizes throughout the site will create a cohesive look. Additionally, improving the quality of images and expanding the use of engaging visuals, such as an immersive header image, will enrich the overall user experience.
+
+#### Content Quality
+
+Content organisation needs improvement; key objectives and reasons for supporting the Trust should be more prominent on the homepage. Consider user journeys by simplifying navigation to make it easier to find relevant information. Information about becoming a member should be more accessible, ideally placed on the ‘Support Us’ page. Including an impact statement and a clearer outline of the Trust’s mission will strengthen communication with potential supporters.
+
+#### Functionality
+
+While the site loads quickly on both desktop and mobile devices, there are broken links that need attention, such as the ‘Go Fund Me’ link and some missing images. Contact forms would benefit from clearer prompts and visual cues, such as asterisks for required fields, to improve user engagement. Additionally, ensuring error messages are displayed in real-time rather than after submission will enhance usability.
+
+<spacer></spacer>
+<pagebreak></pagebreak>
+<spacer></spacer>
+
+#### SEO
+
+To improve search visibility, it is essential to incorporate relevant keywords throughout the website. Implementing meta descriptions for all pages will aid both user understanding and search engine indexing. Furthermore, adding alt text for images, ensuring the site is optimised for mobile, and embedding a Google map will improve local SEO rankings and enhance user experience.
+
+#### Accessibility
+
+The site currently has some good contrast between text and background, but larger blocks of text can be overwhelming. A more distinct hierarchy of headings will enhance navigation and readability. It is vital to provide alt text for images and consider additional multimedia content, such as video, to cater to users who prefer visual information. Ensuring that text sizes are accessible and easy to read is crucial for inclusivity.
+
+#### Audience Engagement
+
+Calls to action, like signing up for newsletters or getting involved, should be more visible and user-friendly. Incorporating share buttons on projects and news sections will encourage greater interaction. A dedicated ‘Support Us’ section should streamline the process for users wishing to engage with the Trust, making it easier for them to take action.
+
+#### Security and Compliance
+
+The privacy policy needs standardization across different sections of the site, written in clear and plain language for better user understanding. Including compliance checkboxes for sign-up forms is necessary to ensure GDPR compliance and protect users’ personal information.
+
+#### Management of CMS
+
+While Directus can be an effective CMS, its complexity may pose challenges for our team who have limited technical expertise. A transition to a more user-friendly platform may be beneficial for easier maintenance and regular updates, ensuring we can efficiently manage and edit content without needing extensive coding skills.
